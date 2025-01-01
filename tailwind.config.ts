@@ -4,7 +4,6 @@ import daisyui from "daisyui";
 const config: Config = {
   daisyui: {
     themes: [
-      "dim",
       {
         mytheme: {
           primary: "#f59e0b",
