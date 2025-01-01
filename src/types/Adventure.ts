@@ -1,6 +1,6 @@
 export type Adventure = {
   id: string;
-  timeSlot: 1 | 2;
+  timeSlot: 1 | 2 | 3;
   tableNumber: number;
   title: string;
   ruleset: string;

@@ -27,7 +27,8 @@ export const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({
   const { name, seats, id: bookingId } = booking;
   const { title, timeSlot } = adventure;
 
-  const time = timeSlot === 1 ? "10.00 - 14.00" : "16.00 - 20.00";
+  const date = timeSlot > 2 ? "Domenica 23 Marzo 2025" : "Sabato 22 Marzo 2025";
+  const time = timeSlot !== 2 ? "10:00–13:00" : "17:00–20:00";
   const mail = process.env.MAIL_CONTACT;
 
   return (
@@ -47,7 +48,7 @@ export const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({
           </Text>
           <Text style={{ fontSize: "16px", lineHeight: "1.6" }}>
             - <strong>Avventura:</strong> {title}
-            <br />- <strong>Data:</strong> Sabato 23 Novembre 2024
+            <br />- <strong>Data:</strong> {date}
             <br />- <strong>Presso:</strong>{" "}
             <Link href="https://maps.app.goo.gl/WUAuStwHQdpZ1XLt6">
               La Pieve di Cologno, Piazza S. Matteo, 24, Cologno Monzese MI

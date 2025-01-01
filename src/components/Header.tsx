@@ -20,15 +20,15 @@ export const Header = () => {
       <nav className="bg-base-200 rounded-md navbar">
         <ul className="flex justify-center space-x-2 font-bold menu menu-horizontal">
           <li>
-            <Link href="https://www.totalpartykon.it/">Cos&apos;è TPK!</Link>
+            <Link href="https://www.froggycon.it/">Cos&apos;è FroggyCon</Link>
           </li>
           <li>
-            <Link href="https://www.totalpartykon.it/dove-e-quando">
+            <Link href="https://www.froggycon.it/dove-e-quando">
               Dove e quando?
             </Link>
           </li>
           <li>
-            <Link href="https://www.totalpartykon.it/contatti">Contatti</Link>
+            <Link href="https://www.froggycon.it/chi-siamo">Chi siamo</Link>
           </li>
         </ul>
       </nav>

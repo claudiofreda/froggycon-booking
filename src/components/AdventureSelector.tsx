@@ -39,14 +39,21 @@ export const AdventureSelector: React.FC<{
             onClick={() => setTimeSlot(1)}
             className={`btn btn-primary ${timeSlot === 1 ? "" : "btn-outline"}`}
           >
-            10.00 - 14.00
+            Sabato 22 Marzo ’25, 10:00–13:00
           </button>
 
           <button
             onClick={() => setTimeSlot(2)}
             className={`btn btn-accent ${timeSlot === 2 ? "" : "btn-outline"}`}
           >
-            16.00 - 20.00
+            Sabato 22 Marzo ’25, 17:00–20:00
+          </button>
+
+          <button
+            onClick={() => setTimeSlot(3)}
+            className={`btn btn-secondary ${timeSlot === 3 ? "" : "btn-outline"}`}
+          >
+            Domenica 23 Marzo ’25, 10:00–13:00
           </button>
         </section>
 

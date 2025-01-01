@@ -42,10 +42,10 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
           <div className="flex flex-row justify-between items-center">
             <div
               className={`font-bold p-2 badge ${
-                timeSlot === 1 ? "badge-primary" : "badge-accent"
+                timeSlot === 1 ? "badge-primary" : timeSlot === 2 ? "badge-accent" : "badge-secondary"
               }`}
             >
-              {timeSlot === 1 ? "10.00 - 14.00" : "16.00 - 20.00"}
+              {timeSlot === 1 ? "Sabato 22 Marzo ’25, 10:00–13:00" : timeSlot === 2 ? "Sabato 22 Marzo ’25, 17:00–20:00" : "Domenica 23 Marzo ’25, 10:00–13:00"}
             </div>
 
             {age && <div className="p-2.5 badge badge-outline">Età: {age}</div>}
@@ -60,7 +60,7 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
           <span className="italic">{ruleset}</span>,{" "}
           <>
             per {useMinPlayers ? `almeno ${minPlayers}` : maxPlayers}{" "}
-            avventurierɜ
+            partecipanti
           </>
         </p>
         <p className="max-w-3xl">
@@ -75,7 +75,7 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
         </p>
         <div className="flex space-x-2">
           <p>
-            <strong>Arbitrə:</strong> {masterName}
+            <strong>Facilitata da:</strong> {masterName}
           </p>
           <p></p>
         </div>
