@@ -20,8 +20,8 @@ export async function sendConfirmationEmail({
   if (!resendEnabled) return;
 
   const subject = update
-    ? "Conferma Modifica Prenotazione TPK! 2024"
-    : "Conferma Prenotazione TPK! 2024";
+    ? "Conferma Modifica Prenotazione FroggyCon III"
+    : "Conferma Prenotazione FroggyCon III";
 
   const emailHtml = await render(
     <ConfirmationEmail

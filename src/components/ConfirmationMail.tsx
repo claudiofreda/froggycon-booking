@@ -40,7 +40,7 @@ export const ConfirmationEmail: React.FC<ConfirmationEmailProps> = ({
           <Heading>Ciao {name},</Heading>
           <Text>
             È ufficiale: hai {seats} post{seats === 1 ? "o" : "i"} prenotati per
-            l&apos;avventura {title} al TPK!
+            la sessione {title} alla FroggyCon III
           </Text>
 
           <Text style={{ fontSize: "16px", marginBottom: "20px" }}>

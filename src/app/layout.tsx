@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Prenotazioni | TPK! 2024",
-  description: "Prenotazioni per Total Party Kon 2024",
+  title: "Prenotazioni | FroggyCon III",
+  description: "Prenotazioni per FroggyCon III",
 };
 
 export default function RootLayout({
