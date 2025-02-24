@@ -10,7 +10,7 @@ export default async function PublicLayout({
   return (
     <>
       <p className="mb-2">
-        Alla FroggyCon, ciascuna sessione inizia da uno scenario, preparato o generato al momento: un punto d&apos;inizio, senza fine premeditata.
+        Alla FroggyCon, ciascuna sessione inizia da una situazione: un punto d&apos;inizio, senza fine premeditata.
         Vi siederete a un tavolo con gli altri partecipanti e il facilitatore. Ascoltatelo e aiutatelo quando potete: il suo ruolo è di insegnarvi a giocare.
       </p><p className="mb-2">
         Liberatevi da tutte le aspettative riguardo a come debba andare la sessione. Sedetevi con interesse e apertura,
