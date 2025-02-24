@@ -52,7 +52,7 @@ export const AdventureCard: React.FC<AdventureCardProps> = ({
           </div>
 
           <h2 className="flex-1 card-title">
-            &lpar;{tableNumber}&rpar; {title}
+            ({tableNumber}) {title}
           </h2>
         </div>
 
