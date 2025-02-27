@@ -34,7 +34,7 @@ export const Header = () => {
             <Link href="https://www.froggycon.it/i-nostri-principi">I nostri principi</Link>
           </li>
           <li>
-            <Link href="https://www.froggycon.it/workshop">Programma workshop</Link>
+            <Link href="https://www.froggycon.it/workshop">Programma workshop (14&ndash;16 sabato e domenica)</Link>
           </li>
         </ul>
       </nav>
