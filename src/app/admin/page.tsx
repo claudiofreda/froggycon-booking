@@ -4,7 +4,7 @@ import { User } from "@/components/admin/User";
 import { getBookings } from "@/lib/bookings";
 import { getSessions } from "@/lib/sessions";
 
-import { TimeSlot } from "@/utils/timeSlots";
+import { TimeSlot, timeSlots } from "@/utils/timeSlots";
 import { getUserOrRedirect } from "@propelauth/nextjs/server/app-router";
 
 export default async function Admin() {
@@ -18,32 +18,27 @@ export default async function Admin() {
     <section className="space-y-8">
       <User />
       <Totals bookings={bookings} sessions={sessions} />
-      <Table
-        bookings={bookings}
-        sessions={sessions}
-        currentTimeSlot={TimeSlot.DAY_1_MORNING}
-      />
-      <Table
-        bookings={bookings}
-        sessions={sessions}
-        currentTimeSlot={TimeSlot.DAY_1_AFTERNOON}
-      />
-      <Table
-        bookings={bookings}
-        sessions={sessions}
-        currentTimeSlot={TimeSlot.DAY_1_EVENING}
-      />
 
-      <Table
-        bookings={bookings}
-        sessions={sessions}
-        currentTimeSlot={TimeSlot.DAY_2_MORNING}
-      />
-      <Table
-        bookings={bookings}
-        sessions={sessions}
-        currentTimeSlot={TimeSlot.DAY_2_AFTERNOON}
-      />
+      {[
+        TimeSlot.DAY_1_MORNING,
+        TimeSlot.DAY_1_AFTERNOON,
+        TimeSlot.DAY_1_EVENING,
+        TimeSlot.DAY_2_MORNING,
+        TimeSlot.DAY_2_AFTERNOON,
+      ].map((item) => (
+        <section key={item}>
+          <b>{timeSlots[item].label}</b>
+          <Totals
+            bookings={bookings}
+            sessions={sessions.filter(({ timeSlot }) => timeSlot === item)}
+          />
+          <Table
+            bookings={bookings}
+            sessions={sessions}
+            currentTimeSlot={item}
+          />
+        </section>
+      ))}
     </section>
   );
 }

@@ -17,6 +17,20 @@ const DEFAULT_FIELDS: Field[] = [
   { key: "maxPlayers", style: { width: "20%" } },
 ] as const;
 
+const getClassNameForSession = (session: Session) => {
+  const bookedSeats = session.maxPlayers - session.availableSeats;
+
+  if (bookedSeats >= session.minPlayers) {
+    return "bg-green-400 bg-opacity-20";
+  }
+
+  if (bookedSeats > 0 && bookedSeats < session.minPlayers) {
+    return "bg-amber-400 bg-opacity-20";
+  }
+
+  return "bg-base-200";
+};
+
 export const Table: FC<{
   sessions: Session[];
   bookings: Booking[];
@@ -82,7 +96,7 @@ export const Table: FC<{
             const firstCellRowSpan = bookingRows.length + 1;
             return (
               <Fragment key={session.id}>
-                <tr className="bg-base-200">
+                <tr className={getClassNameForSession(session)}>
                   {fields.map((field, index) => (
                     <td
                       className="px-4"

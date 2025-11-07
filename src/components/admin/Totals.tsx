@@ -10,9 +10,9 @@ export const Totals: FC<{ bookings: Booking[]; sessions: Session[] }> = ({
   const t = useTranslations("Components.Totals");
 
   const calculateTotal = (timeSlots: TimeSlot[]) => {
-    const filteredSessions = sessions.filter(({ timeSlot }) =>
-      timeSlots.includes(timeSlot)
-    );
+    const filteredSessions = sessions
+      .filter(({ isPanel }) => !isPanel)
+      .filter(({ timeSlot }) => timeSlots.includes(timeSlot));
 
     const totalSeats = filteredSessions.reduce(
       (total, { maxPlayers }) => total + (maxPlayers || 0),
@@ -80,7 +80,7 @@ export const Totals: FC<{ bookings: Booking[]; sessions: Session[] }> = ({
 
   return (
     <section className="space-y-4">
-      {renderTotal(t("bookingsTotal"), allTimeSlots)}
+      {renderTotal("Totale prenotazioni", allTimeSlots)}
     </section>
   );
 };
