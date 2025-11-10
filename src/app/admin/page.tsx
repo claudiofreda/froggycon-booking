@@ -1,4 +1,4 @@
-import { Pie } from "@/components/admin/Chart";
+import { BookingLine } from "@/components/admin/BookingLine";
 import { Table } from "@/components/admin/Table";
 import { Totals } from "@/components/admin/Totals";
 import { User } from "@/components/admin/User";
@@ -18,6 +18,9 @@ export default async function Admin() {
   return (
     <section className="space-y-8">
       <User />
+
+      <BookingLine bookings={bookings} />
+
       <Totals bookings={bookings} sessions={sessions} />
 
       {[

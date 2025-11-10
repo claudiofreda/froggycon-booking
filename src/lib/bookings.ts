@@ -11,11 +11,12 @@ const spreadsheetId = config.bookingsSheetId;
 const range = config.bookingsRange;
 
 type BookingRow = [
+  Booking["timeStamp"],
   Booking["id"],
   Booking["name"],
   Booking["email"],
   Booking["seats"],
-  Booking["sessionId"],
+  Booking["sessionId"]
 ];
 
 export async function getBookings(): Promise<Booking[]> {
@@ -27,17 +28,18 @@ export async function getBookings(): Promise<Booking[]> {
   const bookingsRows = bookingsResponse ? bookingsResponse : [];
 
   const bookings = bookingsRows.map((row) => {
-    const [, id, name, email, seats, sessionId] = row as [
+    const [timeStamp, id, name, email, seats, sessionId] = row as [
       string,
-      ...BookingRow,
+      ...BookingRow
     ];
 
     return {
+      timeStamp,
       id,
       name,
       email,
       seats: Number(seats),
-      sessionId,
+      sessionId: String(sessionId),
     };
   });
 
@@ -68,7 +70,7 @@ export async function addBooking({
   await appendDataToSheet({
     spreadsheetId,
     range,
-    data: [id, name, email, seats, sessionId] as BookingRow,
+    data: [id, name, email, seats, sessionId],
   });
 }
 
@@ -78,13 +80,7 @@ export async function updateBooking({
   seats,
   sessionId,
 }: Omit<Booking, "email">) {
-  const newData = [
-    id,
-    name,
-    undefined,
-    seats,
-    sessionId,
-  ] as Partial<BookingRow>;
+  const newData = [id, name, undefined, seats, sessionId];
 
   return updateRowById({
     spreadsheetId,
