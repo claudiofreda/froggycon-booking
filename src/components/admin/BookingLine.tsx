@@ -14,7 +14,6 @@ export const BookingLine: FC<BookingLineProps> = ({ bookings }) => {
     .filter(({ timeStamp }) => timeStamp && timeStamp !== "timestamp")
     .reduce((acc, booking) => {
       const date = new Date(booking.timeStamp);
-      console.log(date, booking.timeStamp);
       const dayKey = date.toISOString().split("T")[0];
       acc[dayKey] = (acc[dayKey] || 0) + 1;
       return acc;
