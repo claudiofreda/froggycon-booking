@@ -1,3 +1,4 @@
+import { Pie } from "@/components/admin/Chart";
 import { Table } from "@/components/admin/Table";
 import { Totals } from "@/components/admin/Totals";
 import { User } from "@/components/admin/User";
