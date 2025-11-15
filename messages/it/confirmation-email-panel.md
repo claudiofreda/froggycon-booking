@@ -12,10 +12,9 @@ I dettagli da sapere:
 
 Puoi gestire la tua prenotazione cliccando [qui]({{bookingUrl}}).
 
-Se vuoi pranzare con noi è necessario ordinare a questi link entro e non oltre giovedì 20 novembre
+Se sabato vuoi pranzare con noi è necessario ordinare con il form qui sotto entro e non oltre giovedì 20 novembre
 
-- Sabato: [forms.gle/VrFciGvoGvoQK51U6](https://forms.gle/VrFciGvoGvoQK51U6)
-- Domenica: [forms.gle/iYAVD4ugMFuZnJse9](https://forms.gle/iYAVD4ugMFuZnJse9)
+[forms.gle/VrFciGvoGvoQK51U6](https://forms.gle/VrFciGvoGvoQK51U6)
 
 Per qualsiasi dubbio, domanda, o richiesta particolare sentiti liberə di contattarci a [{{mail}}](mailto:{{mail}}).
 
