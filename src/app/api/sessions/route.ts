@@ -1,16 +1,13 @@
 import { NextResponse } from "next/server";
-import { getAdventures } from "@/lib/adventures";
+import { getSessions } from "@/lib/sessions";
 
 export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {
-    const adventures = await getAdventures();
-    return NextResponse.json(adventures, {
+    const sessions = await getSessions();
+    return NextResponse.json(sessions, {
       status: 200,
-      headers: new Headers({
-        "Cache-Control": "public, max-age=60, immutable",
-      }),
     });
   } catch (error) {
     return NextResponse.json(

@@ -1,46 +1,37 @@
-import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
+import type { Config } from "tailwindcss";
+import timeslotColors from "./tailwind-plugins/timeslot-colors";
 
 const config: Config = {
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: "#f59e0b",
-
-          secondary: "#f97316",
-
-          accent: "#2dd4bf",
+          primary: "#fcc041",
+          "primary-content": "#fffdf1",
+          secondary: "#fc9141",
+          "secondary-content": "#fffdf1",
+          accent: "#2ab7ca",
+          "accent-content": "#fffdf1",
 
           "base-100": "#fffdf1",
-
           neutral: "#281b1c",
 
           info: "#60a5fa",
-
           success: "#84cc16",
-
           warning: "#fde047",
-
           error: "#be123c",
         },
       },
     ],
   },
 
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
+      colors: {},
     },
   },
-  plugins: [daisyui],
+  plugins: [daisyui, timeslotColors],
 };
 export default config;

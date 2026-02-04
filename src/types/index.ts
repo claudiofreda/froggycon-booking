@@ -1,4 +1,4 @@
-export * from "./Adventure";
+export * from "./Session";
 export * from "./Booking";
 export * from "./BookingFormInputs";
 export * from "./InputFieldProps";

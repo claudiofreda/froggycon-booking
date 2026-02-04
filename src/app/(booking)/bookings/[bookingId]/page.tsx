@@ -1,50 +1,68 @@
 import NotFound from "@/app/not-found";
-import { AdventureCard } from "@/components/AdventureCard";
-import { BookingForm } from "@/components/BookingForm";
-import { DeleteBooking } from "@/components/DeleteBooking";
+import { BookingDeleteButton } from "@/components/booking/BookingDeleteButton";
+import { BookingForm } from "@/components/booking/BookingForm";
+import { TermsAndConditions } from "@/components/input/TermsAndConditions";
 import { PageTitle } from "@/components/PageTitle";
-import { getAdventures } from "@/lib/adventures";
+import { SessionCard } from "@/components/session/SessionCard";
 import { getBookingById } from "@/lib/bookings";
+import { getSessionById } from "@/lib/sessions";
 import { Booking } from "@/types";
+import config from "@/utils/config";
+import fs from "fs";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+import path from "path";
+
+export const dynamic = "force-dynamic";
 
 export default async function BookingDetails({
   params,
 }: {
   params: { bookingId: Booking["id"] };
 }) {
+  const t = await getTranslations({ namespace: "BookingDetails" });
+
   const { bookingId } = params;
   const booking = await getBookingById(bookingId);
 
   if (!booking)
     return (
       <NotFound
-        description="La prenotazione non esiste o è stata cancellata"
-        ctaLabel="Crea una nuova prenotazione"
+        description={t("NotFound.description")}
+        ctaLabel={t("NotFound.ctaLabel")}
       />
     );
 
-  const adventures = await getAdventures();
-  const selectedAdventure = adventures.find(
-    ({ id }) => id === booking.adventureId
+  const selectedSession = await getSessionById(booking.sessionId);
+
+  const sessionSelectionPath = `/bookings/${bookingId}/session`;
+  if (!selectedSession) redirect(sessionSelectionPath);
+
+  const filePath = path.join(
+    process.cwd(),
+    "messages/",
+    config.defaultLocale,
+    "/terms-and-conditions.md"
   );
 
-  const adventureSelectionPath = `/bookings/${bookingId}/adventure`;
-  if (!selectedAdventure) redirect(adventureSelectionPath);
+  const termsAndConditions = fs.readFileSync(filePath, "utf8");
 
   return (
     <>
-      <PageTitle title="Modifica la prenotazione" />
+      <PageTitle title={t("title")} />
 
-      <AdventureCard {...selectedAdventure} expanded />
+      <SessionCard {...selectedSession} expanded />
 
       <BookingForm
         defaultBooking={booking}
-        selectedAdventure={selectedAdventure}
+        selectedSession={selectedSession}
+        termsAndConditions={
+          <TermsAndConditions termsAndConditions={termsAndConditions} />
+        }
       />
 
       <section className="mt-4">
-        <DeleteBooking bookingId={booking.id} />
+        <BookingDeleteButton bookingId={booking.id} />
       </section>
     </>
   );

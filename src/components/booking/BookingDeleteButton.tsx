@@ -2,19 +2,26 @@
 
 import { ErrorToast } from "@/components/ErrorToast";
 import { Loader } from "@/components/Loader";
-import { useAdventures } from "@/hooks/useAdventures";
+import { useSessions } from "@/hooks/useSessions";
 import { useBookingForm } from "@/hooks/useBookingForm";
 import { Booking } from "@/types";
 import { redirect } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
-export const DeleteBooking = ({ bookingId }: { bookingId: Booking["id"] }) => {
+export const BookingDeleteButton = ({
+  bookingId,
+}: {
+  bookingId: Booking["id"];
+}) => {
   const [confirmationModalOpen, setConfirmationModalOpen] =
     useState<boolean>(false);
 
   const { loading, result, error, deleteBooking } = useBookingForm();
-  const { invalidateCache: invalidateAdventureCache } = useAdventures();
+  const { invalidateCache: invalidateSessionCache } = useSessions();
+
+  const t = useTranslations("Components.BookingDeleteButton");
 
   useEffect(() => {
     if (result) redirect("/");
@@ -31,7 +38,7 @@ export const DeleteBooking = ({ bookingId }: { bookingId: Booking["id"] }) => {
         className="w-full btn btn-error"
         onClick={() => setConfirmationModalOpen(true)}
       >
-        Elimina la prenotazione
+        {t("deleteBooking")}
       </button>
 
       {loading && <Loader />}
@@ -48,28 +55,24 @@ export const DeleteBooking = ({ bookingId }: { bookingId: Booking["id"] }) => {
               ✕
             </button>
 
-            <h3 className="font-bold text-lg">
-              Stai eliminando una prenotazione
-            </h3>
-            <p className="py-4">
-              Sei sicurə di voler eliminare la prenotazione?
-            </p>
+            <h3 className="font-bold text-lg">{t("modal.title")}</h3>
+            <p className="py-4">{t("modal.body")}</p>
             <div className="flex space-x-4 w-full">
               <button
                 className="flex-1 btn btn-error"
                 onClick={() => {
                   deleteBooking(bookingId);
                   setConfirmationModalOpen(false);
-                  invalidateAdventureCache();
+                  invalidateSessionCache();
                 }}
               >
-                Sì, cancella la prenotazione
+                {t("modal.yes")}
               </button>
               <button
                 className="flex-1 btn"
                 onClick={() => setConfirmationModalOpen(false)}
               >
-                No, annulla l&apos;operazione
+                {t("modal.no")}
               </button>
             </div>
           </div>

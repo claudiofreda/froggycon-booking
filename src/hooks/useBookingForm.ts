@@ -14,13 +14,13 @@ export const useBookingForm = () => {
     setResult(null);
 
     try {
-      const { name, email, seats, adventureId } = bookingData;
+      const { name, email, seats, sessionId } = bookingData;
 
       const requiredFieldMissing =
-        [name, email, seats, adventureId].filter(Boolean).length === 0;
+        [name, email, seats, sessionId].filter(Boolean).length === 0;
 
       if (requiredFieldMissing) {
-        throw new Error("Errore durante l'aggiornamento della prenotazione");
+        throw new Error("Required field missing. Could not create booking.");
       }
 
       const response = await fetch("/api/bookings", {
@@ -28,20 +28,17 @@ export const useBookingForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, seats, adventureId }),
+        body: JSON.stringify({ name, email, seats, sessionId }),
       });
 
       if (!response.ok) {
-        throw new Error("Errore durante la creazione della prenotazione");
+        throw new Error("Could not create booking.");
       }
 
       const result = await response.json();
       setResult(result);
     } catch (error) {
-      setError(
-        (error as Error).message ||
-          "Errore durante la creazione della prenotazione."
-      );
+      setError((error as Error).message || "Could not create booking.");
     } finally {
       setLoading(false);
     }
@@ -56,13 +53,13 @@ export const useBookingForm = () => {
     setResult(null);
 
     try {
-      const { name, seats, adventureId } = bookingData;
+      const { name, seats, sessionId } = bookingData;
 
       const requiredFieldMissing =
-        [name, seats, adventureId].filter(Boolean).length === 0;
+        [name, seats, sessionId].filter(Boolean).length === 0;
 
       if (requiredFieldMissing) {
-        throw new Error("Errore durante l'aggiornamento della prenotazione");
+        throw new Error("Required field missing. Could not update booking.");
       }
 
       const response = await fetch(`/api/bookings`, {
@@ -70,20 +67,17 @@ export const useBookingForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, name, seats, adventureId }),
+        body: JSON.stringify({ id, name, seats, sessionId }),
       });
 
       if (!response.ok) {
-        throw new Error("Errore durante l'aggiornamento della prenotazione");
+        throw new Error("Could not update booking.");
       }
 
       const result = await response.json();
       setResult(result);
     } catch (error) {
-      setError(
-        (error as Error).message ||
-          "Errore durante l'aggiornamento della prenotazione."
-      );
+      setError((error as Error).message || "Could not update booking.");
     } finally {
       setLoading(false);
     }
@@ -104,16 +98,13 @@ export const useBookingForm = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Errore durante la cancellazione della prenotazione");
+        throw new Error("Could not delete booking.");
       }
 
       await response.json();
       setResult({ deleted: id });
     } catch (error) {
-      setError(
-        (error as Error).message ||
-          "Errore durante la cancellazione della prenotazione."
-      );
+      setError((error as Error).message || "Could not delete booking.");
     } finally {
       setLoading(false);
     }

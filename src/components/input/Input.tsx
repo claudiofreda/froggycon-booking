@@ -4,7 +4,7 @@ import { BookingFormInputs } from "@/types";
 import { InputHTMLAttributes } from "react";
 import { useForm } from "react-hook-form";
 
-interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id: keyof BookingFormInputs;
   register?: ReturnType<typeof useForm<BookingFormInputs>>["register"];
   error?: string;
@@ -12,7 +12,7 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
 }
 
-export const InputField: React.FC<InputFieldProps> = ({
+export const Input: React.FC<InputProps> = ({
   id,
   register = () => {},
   error,

@@ -1,33 +1,38 @@
-import { getAdventures } from "@/lib/adventures";
-import { addBooking, deleteBooking, updateBooking } from "@/lib/bookings";
+import { getSessions } from "@/lib/sessions";
+import {
+  addBooking,
+  deleteBooking,
+  getBookingById,
+  updateBooking,
+} from "@/lib/bookings";
 import { sendConfirmationEmail } from "@/lib/email";
-import { Adventure, Booking, BookingFormInputs } from "@/types";
+import { Session, Booking, BookingFormInputs } from "@/types";
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
 
 function getAvailabilityError(
-  availableSeats: Adventure["availableSeats"]
-): Adventure["id"] {
+  availableSeats: Session["availableSeats"]
+): Session["id"] {
   if (availableSeats === 0) return "Nessun posto disponibile";
   if (availableSeats === 1) return "Solo un posto disponibile";
   return `Solo ${availableSeats} posti disponibili`;
 }
 
 async function validateBookingData({
-  adventureId,
+  sessionId,
   seats,
   addSeats = 0,
 }: {
-  adventureId: Adventure["id"];
+  sessionId: Session["id"];
   seats: Booking["seats"];
   addSeats: Booking["seats"];
 }) {
-  const adventures = await getAdventures();
-  const foundAdventure = adventures.find((a) => a.id === adventureId);
+  const sessions = await getSessions();
+  const foundSession = sessions.find((a) => a.id === sessionId);
 
-  const availabileSeats = (foundAdventure?.availableSeats || 0) + addSeats;
+  const availabileSeats = (foundSession?.availableSeats || 0) + addSeats;
 
-  if (!foundAdventure) {
+  if (!foundSession) {
     return { error: "Avventura non trovata", status: 400 };
   }
 
@@ -36,37 +41,35 @@ async function validateBookingData({
     return { error: availabilityError, status: 400 };
   }
 
-  return { adventure: foundAdventure, error: null };
+  return { session: foundSession, error: null };
 }
 
 async function handleBookingRequest(
   input: BookingFormInputs,
   processBooking: (params: {
     booking: Booking;
-    adventure: Adventure;
+    session: Session;
   }) => Promise<void>
 ) {
   // adds a random UUID when creating the booking, keeps the current id otherwise
   const booking: Booking = { ...input, id: input.id || randomUUID() };
 
   try {
-    const { adventure, error, status } = await validateBookingData({
-      adventureId: booking.adventureId,
+    const { session, error, status } = await validateBookingData({
+      sessionId: booking.sessionId,
       seats: Number(booking.seats),
       addSeats: Number(
-        input.id && booking.adventureId === input.adventureId
-          ? booking.seats
-          : 0
+        input.id && booking.sessionId === input.sessionId ? booking.seats : 0
       ),
     });
 
-    if (error || !adventure) {
+    if (error || !session) {
       return NextResponse.json({ error }, { status });
     }
 
     await processBooking({
       booking,
-      adventure,
+      session,
     });
 
     return NextResponse.json({
@@ -84,18 +87,25 @@ async function handleBookingRequest(
 export async function POST(request: Request) {
   const input = await request.json();
 
-  return handleBookingRequest(input, async ({ booking, adventure }) => {
+  return handleBookingRequest(input, async ({ booking, session }) => {
     await addBooking(booking);
-    await sendConfirmationEmail({ booking, adventure });
+    await sendConfirmationEmail({ booking, session });
   });
 }
 
 export async function PATCH(request: Request) {
   const input = await request.json();
 
-  return handleBookingRequest(input, async ({ booking, adventure }) => {
+  return handleBookingRequest(input, async ({ booking, session }) => {
     await updateBooking(booking);
-    await sendConfirmationEmail({ booking, adventure, update: true });
+    const oldBooking = await getBookingById(booking.id);
+    if (!oldBooking) return;
+
+    await sendConfirmationEmail({
+      booking: { ...booking, email: oldBooking.email },
+      session,
+      update: true,
+    });
   });
 }
 

@@ -1,0 +1,101 @@
+{
+  "BookingDetails": {
+    "NotFound": {
+      "ctaLabel": "Crea una nuova prenotazione",
+      "description": "La prenotazione che stai cercando non esiste o è stata eliminata"
+    },
+    "title": "Modifica prenotazione"
+  },
+  "Components": {
+    "BookingDeleteButton": {
+      "deleteBooking": "Elimina la prenotazione",
+      "modal": {
+        "body": "Sei sicurə di voler eliminare questa prenotazione?",
+        "no": "No",
+        "title": "Stai eliminando una prenotazione",
+        "yes": "Sì"
+      }
+    },
+    "BookingForm": {
+      "confirm": "Ok",
+      "confirmationSent": "Una email di conferma è stata inviata all'indirizzo che hai inserito",
+      "edit": "Modifica",
+      "editSubmitted": "Prenotazione aggiornata",
+      "email": "Email",
+      "emailConfirmation": "Conferma Email",
+      "emailInvalid": "Indirizzo email non valido",
+      "emailPicked": "Email utilizzata durante la registrazione",
+      "emailMismatch": "Gli indirizzi email non corrispondono",
+      "name": "Nome",
+      "required": {
+        "email": "L'email è obbligatoria",
+        "emailConfirmation": "La conferma dell'email è obbligatoria",
+        "name": "Il nome è obbligatorio",
+        "seats": "Il numero di posti è obbligatorio"
+      },
+      "seats": "Numero di posti (max {bookableSeats})",
+      "seatsAtLeastOne": "Prenota almeno un posto",
+      "seatsTooMany": "Il numero di posti supera il massimo consentito",
+      "submit": "Invia",
+      "submitted": "Prenotazione creata"
+    },
+    "ErrorToast": {
+      "body": "Si è verificato un errore. Per favore riprova."
+    },
+    "PrivacyCheckbox": {
+      "closeModal": "Chiudi",
+      "readAndAccept": "Ho letto e accetto i <termsAndConditions>Termini e Condizioni</termsAndConditions>"
+    },
+    "SessionCard": {
+      "availableSeats": "Posti disponibili",
+      "master": "Master",
+      "maxPlayers": "per {maxPlayers} giocatorɜ"
+    },
+    "SessionSelector": {
+      "error": "Errore inaspettato. Ricarica la pagina.",
+      "search": "Cerca una sessione"
+    },
+    "SessionTimeSlotSelector": {
+      "allTimeSlots": "Tutte le sessioni"
+    },
+    "loading": "Caricamento",
+    "Table": {
+      "timeSlot": "Fascia oraria",
+      "tableNumber": "Numero tavolo",
+      "title": "Titolo",
+      "ruleset": "Regolamento",
+      "masterName": "Master",
+      "description": "Descrizione",
+      "minPlayers": "Minimo giocatorɜ",
+      "maxPlayers": "Massimo giocatorɜ",
+      "availableSeats": "Posti disponibili"
+    },
+    "Totals": {
+      "bookingsTotal": "Totale sessioni",
+      "readyToStart": "Pronte a partire"
+    }
+  },
+  "Metadata": {
+    "description": "Prenotazioni per Total Party Kon 2025",
+    "title": "Prenotazioni | TPK! 2025"
+  },
+  "NotFound": {
+    "ctaLabel": "Torna alla homepage",
+    "description": "La pagina che stai cercando non esiste",
+    "title": "Pagina non trovata"
+  },
+  "Session": {
+    "title": "Prenota una sessione"
+  },
+  "SessionSelected": {
+    "backButton": "Scegli un'altra sessione",
+    "noSeatsAvailable": "Questa sessione non ha posti disponibili",
+    "notFound": "La sessione selezionata non esiste"
+  },
+  "email": {
+    "subject": {
+      "create": "TPK! 2025 | Conferma Prenotazione",
+      "update": "TPK! 2025 | Conferma Aggiornamento Prenotazione"
+    }
+  }
+}
