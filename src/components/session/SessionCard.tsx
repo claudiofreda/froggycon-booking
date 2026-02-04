@@ -78,11 +78,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({
 
   return (
     <article
-      className={
-        selectable
-          ? "h-full card bg-base-200 shadow-xl cursor-pointer opacity-80 hover:opacity-100"
-          : "h-full"
-      }
+      className={containerClassName}
       onClick={() => selectable && onSelect(id)}
     >
       <div className={selectable ? "card-body" : "space-y-2"}>
