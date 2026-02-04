@@ -5,6 +5,7 @@ export enum TimeSlot {
 
   DAY_2_MORNING = 4,
   DAY_2_AFTERNOON = 5,
+  DAY_2_EVENING = 6,
 }
 
 type TimeSlotDetails = {
@@ -17,38 +18,45 @@ type TimeSlotDetails = {
 
 export const timeSlots: Record<TimeSlot, TimeSlotDetails> = {
   1: {
-    label: "Sabato 10.00 - 13.00",
-    date: "Sabato 22 Novembre 2025",
+    label: "Sabato 10.00 – 13.00",
+    date: "Sabato 14 marzo 2026",
     day: "Sabato",
-    time: "10.00 - 13.00",
+    time: "10.00 – 13.00",
     className: "timeslot-pink-500",
   },
   2: {
-    label: "Sabato 14.00 - 17.00",
-    date: "Sabato 22 Novembre 2025",
+    label: "Sabato 14.00 – 16.00",
+    date: "Sabato 14 marzo 2026",
     day: "Sabato",
-    time: "14.00 - 17.00",
+    time: "14.00 – 16.00",
     className: "timeslot-fuchsia-500",
   },
   3: {
-    label: "Sabato 17.30 - 20.30",
-    date: "Sabato 22 Novembre 2025",
+    label: "Sabato 17.00 – 20.00",
+    date: "Sabato 14 marzo 2026",
     day: "Sabato",
-    time: "17.30 - 20.30",
+    time: "17.00 – 20.00",
     className: "timeslot-rose-500",
   },
   4: {
-    label: "Domenica 10.00 - 14.00",
-    date: "Domenica 23 Novembre 2025",
+    label: "Domenica 10.00 – 13.00",
+    date: "Domenica 15 marzo 2026",
     day: "Domenica",
-    time: "10.00 - 14.00",
+    time: "10.00 – 13.00",
     className: "timeslot-indigo-500",
   },
   5: {
-    label: "Domenica 16.00 - 20.00",
-    date: "Domenica 23 Novembre 2025",
+    label: "Domenica 14.00 – 16.00",
+    date: "Domenica 15 marzo 2026",
     day: "Domenica",
-    time: "16.00 - 20.00",
+    time: "14.00 – 16.00",
+    className: "timeslot-teal-500",
+  },
+  6: {
+    label: "Domenica 17.00 – 20.00",
+    date: "Domenica 15 marzo 2026",
+    day: "Domenica",
+    time: "17.00 – 20.00",
     className: "timeslot-teal-500",
   },
 } as const satisfies Record<TimeSlot, TimeSlotDetails>;
