@@ -4,7 +4,7 @@ Ciao {{name}},
 
 I dettagli da sapere:
 
-- **Avventura:** {{title}}
+- **Sessione:** {{title}}
 - **Data:** {{date}}
 - **Presso:** [La Pieve di Cologno, Piazza S. Matteo, 24, Cologno Monzese MI](https://maps.app.goo.gl/WUAuStwHQdpZ1XLt6)
 - **Orario:** {{time}}

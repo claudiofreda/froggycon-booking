@@ -9,7 +9,7 @@ export const Header = () => {
         <Link href="/">
           <Image
             src={logo}
-            alt="Logo Total Party Kon"
+            alt="Logo FroggyCon"
             style={{
               width: "auto",
               height: "100%",
@@ -19,7 +19,7 @@ export const Header = () => {
         </Link>
         <h2>
           <b>
-            22 e 23 Novembre 2025 @{" "}
+            14 e 15 marzo 2026 @{" "}
             <a className="underline" href="https://www.progettolapieve.com/">
               Pieve di Cologno
             </a>{" "}
@@ -45,7 +45,7 @@ export const Header = () => {
             <Link href="https://www.froggycon.it/i-nostri-principi">I nostri principi</Link>
           </li>
           <li>
-            <Link href="https://www.froggycon.it/workshop">Programma workshop (14&ndash;16 sabato e domenica)</Link>
+            <Link href="https://www.froggycon.it/workshop">Programma workshop (14:00&ndash;16:00 sabato e domenica)</Link>
           </li>
         </ul>
       </nav>

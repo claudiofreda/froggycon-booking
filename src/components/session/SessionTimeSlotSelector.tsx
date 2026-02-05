@@ -14,7 +14,11 @@ const saturdayTimeSlots = [
   TimeSlot.DAY_1_EVENING,
 ];
 
-const sundayTimeSlots = [TimeSlot.DAY_2_MORNING, TimeSlot.DAY_2_AFTERNOON];
+const sundayTimeSlots = [
+  TimeSlot.DAY_2_MORNING,
+  TimeSlot.DAY_2_AFTERNOON,
+  TimeSlot.DAY_2_EVENING,
+];
 
 export const SessionTimeSlotSelector: FC<SessionTimeSlotSelectorProps> = ({
   selectTimeSlots,

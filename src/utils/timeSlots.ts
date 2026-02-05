@@ -57,6 +57,6 @@ export const timeSlots: Record<TimeSlot, TimeSlotDetails> = {
     date: "Domenica 15 marzo 2026",
     day: "Domenica",
     time: "17.00 – 20.00",
-    className: "timeslot-teal-500",
+    className: "timeslot-emerald-500",
   },
 } as const satisfies Record<TimeSlot, TimeSlotDetails>;

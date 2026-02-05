@@ -48,8 +48,8 @@
     },
     "SessionCard": {
       "availableSeats": "Posti disponibili",
-      "master": "Master",
-      "maxPlayers": "per {maxPlayers} giocatorɜ"
+      "master": "Facilitata da",
+      "maxPlayers": "per {maxPlayers} giocatori"
     },
     "SessionSelector": {
       "error": "Errore inaspettato. Ricarica la pagina.",
@@ -64,10 +64,10 @@
       "tableNumber": "Numero tavolo",
       "title": "Titolo",
       "ruleset": "Regolamento",
-      "masterName": "Master",
+      "masterName": "Facilitata da",
       "description": "Descrizione",
-      "minPlayers": "Minimo giocatorɜ",
-      "maxPlayers": "Massimo giocatorɜ",
+      "minPlayers": "Minimo giocatori",
+      "maxPlayers": "Massimo giocatori",
       "availableSeats": "Posti disponibili"
     },
     "Totals": {
@@ -76,8 +76,8 @@
     }
   },
   "Metadata": {
-    "description": "Prenotazioni per Total Party Kon 2025",
-    "title": "Prenotazioni | TPK! 2025"
+    "description": "Prenotazioni per FroggyCon IV",
+    "title": "Prenotazioni | FroggyCon IV"
   },
   "NotFound": {
     "ctaLabel": "Torna alla homepage",
@@ -94,8 +94,8 @@
   },
   "email": {
     "subject": {
-      "create": "TPK! 2025 | Conferma Prenotazione",
-      "update": "TPK! 2025 | Conferma Aggiornamento Prenotazione"
+      "create": "FroggyCon IV | Conferma Prenotazione",
+      "update": "FroggyCon IV | Conferma Aggiornamento Prenotazione"
     }
   }
 }

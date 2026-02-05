@@ -42,13 +42,13 @@ export const SessionCard: React.FC<SessionCardProps> = ({
     if (isPanel)
       return {
         class: badgeClasses.PANEL,
-        label: "Panel!",
+        label: "Laboratorio",
       };
 
     if (kids)
       return {
         class: badgeClasses.YOUNG,
-        label: "Tavolo TPKids",
+        label: "Tavolo Bambini",
       };
 
     if (age) {

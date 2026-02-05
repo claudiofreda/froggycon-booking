@@ -4,7 +4,7 @@ Ciao {{name}},
 
 I dettagli da sapere:
 
-- **Panel:** {{title}}
+- **Workshop:** {{title}}
 - **Data:** {{date}}
 - **Presso:** [La Pieve di Cologno, Piazza S. Matteo, 24, Cologno Monzese MI](https://maps.app.goo.gl/WUAuStwHQdpZ1XLt6)
 - **Orario:** {{time}}
