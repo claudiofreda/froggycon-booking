@@ -1,5 +1,5 @@
-import { AdventureSelector } from "@/components/AdventureSelector";
+import { SessionSelector } from "@/components/session/SessionSelector";
 
 export default async function Home() {
-  return <AdventureSelector />;
+  return <SessionSelector />;
 }

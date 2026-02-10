@@ -1,18 +1,25 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-export default async function NotFound({
-  description = "In ogni caso questa pagina non esiste",
-  ctaLabel = "Torna alla home",
+export default function NotFound({
+  description,
+  ctaLabel,
+}: {
+  description?: string;
+  ctaLabel?: string;
 }) {
+  const t = useTranslations("NotFound");
+
   return (
     <section className="flex flex-col justify-center items-center my-4 min-h-full text-center">
-      <h2 className="mt-4 font-semibold text-3xl text-secondary">
-        Hai fallito il tiro salvezza!
+      <h2 className="mt-4 font-semibold text-secondary text-3xl">
+        {t("title")}
       </h2>
-      <h2 className="mt-4 font-semibold text-xl">...o forse è colpa nostra?</h2>
-      <p className="mt-4 text-lg text-neutral">{description}</p>
+      <p className="mt-4 text-neutral text-lg">
+        {description || t("description")}
+      </p>
       <Link href="/" className="mt-6 btn btn-primary">
-        {ctaLabel}
+        {ctaLabel || t("ctaLabel")}
       </Link>
     </section>
   );

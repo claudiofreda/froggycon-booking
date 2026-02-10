@@ -10,5 +10,5 @@ export type InputFieldProps<TFormValues extends FieldValues> = {
   label: string;
   type: string;
   register: UseFormRegister<TFormValues>;
-  error?: FieldError | undefined;
+  error?: FieldError;
 };

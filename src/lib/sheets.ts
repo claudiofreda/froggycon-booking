@@ -1,15 +1,16 @@
 import { GoogleSheetsScope, SheetRange } from "@/types";
+import config from "@/utils/config";
 import { google } from "googleapis";
 
 export const getAuth = (scopes: GoogleSheetsScope[]) =>
   new google.auth.GoogleAuth({
     credentials: {
       type: "service_account",
-      project_id: process.env.GOOGLE_PROJECT_ID,
-      private_key_id: process.env.GOOGLE_PRIVATE_KEY_ID,
-      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-      client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      client_id: process.env.GOOGLE_CLIENT_ID,
+      project_id: config.googleProjectId,
+      private_key_id: config.googlePrivateKeyId,
+      private_key: config.googlePrivateKey?.replace(/\\n/g, "\n"),
+      client_email: config.googleClientEmail,
+      client_id: config.googleClientId,
     },
     scopes,
   });
@@ -35,10 +36,7 @@ export async function getSheetData({
 
     return response.data.values || [];
   } catch (error) {
-    console.error(
-      "Errore durante il caricamento dei dati da Google Sheets:",
-      error
-    );
+    console.error("Error loading data from Google Sheets:", error);
     return [];
   }
 }
@@ -69,7 +67,7 @@ export async function appendDataToSheet({
 
     return response.data;
   } catch (error) {
-    console.error("Errore durante l'inserimento dei dati:", error);
+    console.error("Error saving data:", error);
     return [];
   }
 }
@@ -99,7 +97,7 @@ async function getSheetIdByName({
 
     return sheet.properties.sheetId;
   } catch (error) {
-    console.error("Errore durante il recupero dello sheetId:", error);
+    console.error("Error getting sheetId:", error);
     return null;
   }
 }
@@ -138,7 +136,7 @@ export async function updateRowById({
     const rowIndex = await getRowIndexById({ data, id, idColumnIndex });
 
     if (rowIndex === -1) {
-      console.error("ID non trovato");
+      console.error("ID not found");
       return null;
     }
     const currentRow = data[rowIndex];
@@ -161,7 +159,7 @@ export async function updateRowById({
 
     return response.data;
   } catch (error) {
-    console.error("Errore durante l'aggiornamento della riga:", error);
+    console.error("Error updating row:", error);
     return null;
   }
 }
@@ -189,7 +187,7 @@ export async function deleteRowById({
     const rowIndex = await getRowIndexById({ data, id, idColumnIndex });
 
     if (rowIndex === -1) {
-      console.error("ID non trovato");
+      console.error("ID not found");
       return null;
     }
 
@@ -215,7 +213,7 @@ export async function deleteRowById({
 
     return response.data;
   } catch (error) {
-    console.error("Errore durante la cancellazione della riga:", error);
+    console.error("Error deleting row:", error);
     return null;
   }
 }

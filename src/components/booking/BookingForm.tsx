@@ -2,25 +2,27 @@
 
 import { ErrorToast } from "@/components/ErrorToast";
 import { Loader } from "@/components/Loader";
-import { PrivacyCheckbox } from "@/components/PrivacyCheckbox";
 import { useBookingForm } from "@/hooks/useBookingForm";
-import { Adventure, BookingFormInputs } from "@/types";
+import { BookingFormInputs, Session } from "@/types";
 import { anonymizeEmail } from "@/utils/anonymizeEmail";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputField } from "./InputField";
-import { Label } from "./Label";
-import { useAdventures } from "@/hooks/useAdventures";
+
+import { Input, Label, PrivacyCheckbox } from "@/components/input";
+import { useSessions } from "@/hooks/useSessions";
+import { useTranslations } from "next-intl";
 
 type BookingFormProps = {
   defaultBooking?: BookingFormInputs;
-  selectedAdventure: Adventure;
+  selectedSession: Session;
+  termsAndConditions: JSX.Element;
 };
 
 export const BookingForm: React.FC<BookingFormProps> = ({
   defaultBooking,
-  selectedAdventure,
+  selectedSession,
+  termsAndConditions,
 }) => {
   const {
     watch,
@@ -32,13 +34,13 @@ export const BookingForm: React.FC<BookingFormProps> = ({
     mode: "onChange",
   });
 
-  const { availableSeats, id: adventureId } = selectedAdventure;
+  const { availableSeats, maxPlayers, id: sessionId } = selectedSession;
 
-  const { invalidateCache: invalidateAdventureCache } = useAdventures();
+  const { invalidateCache: invalidateSessionCache } = useSessions();
 
   const bookableSeats = (() => {
-    if (defaultBooking && defaultBooking.adventureId === adventureId) {
-      return availableSeats + defaultBooking.seats;
+    if (defaultBooking && defaultBooking.sessionId === sessionId) {
+      return Math.min(availableSeats + defaultBooking.seats, maxPlayers);
     }
 
     return availableSeats;
@@ -49,40 +51,39 @@ export const BookingForm: React.FC<BookingFormProps> = ({
 
   const onSubmit = (data: BookingFormInputs) => {
     if (defaultBooking && defaultBooking.id) {
-      updateBooking(defaultBooking.id, { ...data, adventureId });
+      updateBooking(defaultBooking.id, { ...data, sessionId });
     } else {
-      createBooking({ ...data, adventureId });
+      createBooking({ ...data, sessionId });
     }
 
-    invalidateAdventureCache();
+    invalidateSessionCache();
   };
 
   const [privacyCheckbox, setPrivacyCheckbox] = useState(false);
 
   const editMode = Boolean(defaultBooking?.email);
 
+  const t = useTranslations("Components.BookingForm");
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto">
       <section className="space-y-4">
-        {/* Nome */}
+        {/* Name */}
         <div>
-          <Label htmlFor="name" text="Nome" />
-          <InputField
+          <Label htmlFor="name" text={t("name")} />
+          <Input
             id="name"
             type="text"
             register={register}
             error={errors.name?.message}
-            validationRules={{ required: "Il nome è obbligatorio" }}
+            validationRules={{ required: t("required.name") }}
           />
         </div>
 
         {defaultBooking?.email && (
           <div>
-            <Label
-              htmlFor="email"
-              text="L'indirizzo scelto durante la registrazione"
-            />
-            <InputField
+            <Label htmlFor="email" text={t("emailPicked")} />
+            <Input
               id="email"
               type="email"
               disabled
@@ -95,56 +96,56 @@ export const BookingForm: React.FC<BookingFormProps> = ({
           <>
             {/* Email */}
             <div>
-              <Label htmlFor="email" text="Email" />
-              <InputField
+              <Label htmlFor="email" text={t("email")} />
+              <Input
                 id="email"
                 type="email"
                 register={register}
                 error={errors.email?.message}
                 validationRules={{
-                  required: "L'email è obbligatoria",
+                  required: t("required.email"),
                   pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Indirizzo email non valido",
+                    message: t("emailInvalid"),
                   },
                 }}
               />
             </div>
 
             <div>
-              <Label htmlFor="confirmEmail" text="Conferma Email" />
-              <InputField
-                id="confirmEmail"
+              <Label
+                htmlFor="emailConfirmation"
+                text={t("emailConfirmation")}
+              />
+              <Input
+                id="emailConfirmation"
                 type="email"
                 register={register}
-                error={errors.confirmEmail?.message}
+                error={errors.emailConfirmation?.message}
                 validationRules={{
-                  required: "La conferma dell'email è obbligatoria",
+                  required: t("required.emailConfirmation"),
                   validate: (value: string) =>
-                    value === watch("email") || "Le email non corrispondono",
+                    value === watch("email") || t("emailMismatch"),
                 }}
               />
             </div>
           </>
         )}
 
-        {/* Numero di posti */}
+        {/* Number of seats */}
         <div>
-          <Label
-            htmlFor="seats"
-            text={`Numero di posti da prenotare (massimo ${bookableSeats})`}
-          />
-          <InputField
+          <Label htmlFor="seats" text={t("seats", { bookableSeats })} />
+          <Input
             id="seats"
             type="number"
             register={register}
             error={errors.seats?.message}
             validationRules={{
-              required: "Il numero di posti è obbligatorio",
-              min: { value: 1, message: "Devi prenotare almeno un posto" },
+              required: t("required.seats"),
+              min: { value: 1, message: t("seatsAtLeastOne") },
               max: {
                 value: bookableSeats,
-                message: "Non ci sono abbastanza posti disponibili",
+                message: t("seatsTooMany"),
               },
             }}
           />
@@ -154,11 +155,12 @@ export const BookingForm: React.FC<BookingFormProps> = ({
           <PrivacyCheckbox
             isChecked={privacyCheckbox}
             setIsChecked={setPrivacyCheckbox}
+            termsAndConditions={termsAndConditions}
           />
         </div>
       </section>
 
-      {/* Pulsante di invio */}
+      {/* Submit button */}
       <button
         type="submit"
         className={`${
@@ -166,10 +168,10 @@ export const BookingForm: React.FC<BookingFormProps> = ({
         } p-2 btn w-full mt-4`}
         disabled={!privacyCheckbox || !isValid}
       >
-        {editMode ? "Modifica!" : "Prenota!"}
+        {editMode ? t("edit") : t("submit")}
       </button>
 
-      {loading && <Loader text="Giusto un attimo" />}
+      {loading && <Loader />}
 
       <ErrorToast error={Boolean(error)} />
 
@@ -177,15 +179,12 @@ export const BookingForm: React.FC<BookingFormProps> = ({
         <dialog className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg">
-              {editMode ? "Modifica alla prenotazione" : "Prenotazione"}{" "}
-              inviata!
+              {editMode ? t("editSubmitted") : t("submitted")}
             </h3>
-            <p className="py-4">
-              Riceverai una mail di conferma all&apos;indirizzo indicato.
-            </p>
+            <p className="py-4">{t("confirmationSent")}</p>
             <div className="flex justify-center space-x-4 w-full">
               <Link href="/">
-                <button className="flex-1 btn">Ok</button>
+                <button className="flex-1 btn">{t("confirm")}</button>
               </Link>
             </div>
           </div>

@@ -1,0 +1,27 @@
+.btn-timeslot {
+  color: var(--timeslot-fg);
+  background-color: var(--timeslot-bg);
+  border-color: var(--timeslot-bg);
+
+  &:hover {
+    color: var(--timeslot-fg);
+    background-color: color-mix(in oklab, var(--timeslot-bg) 90%, black);
+    border-color: color-mix(in oklab, var(--timeslot-bg) 90%, black);
+  }
+
+  &.btn-timeslot-outline {
+    @apply btn-outline;
+    color: var(--timeslot-bg);
+
+    &:hover {
+      color: var(--timeslot-fg);
+      background-color: color-mix(in oklab, var(--timeslot-bg) 90%, black);
+      border-color: color-mix(in oklab, var(--timeslot-bg) 90%, black);
+    }
+  }
+}
+
+.badge-timeslot {
+  background: var(--timeslot-bg);
+  color: var(--timeslot-fg);
+}

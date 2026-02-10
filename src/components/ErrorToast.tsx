@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
 
 export const ErrorToast = ({ error }: { error: boolean }) => {
   const [showError, setShowError] = useState(false);
+
+  const t = useTranslations("Components.ErrorToast");
 
   useEffect(() => {
     if (error) {
@@ -18,7 +21,7 @@ export const ErrorToast = ({ error }: { error: boolean }) => {
       {showError && (
         <div className="toast" onClick={() => setShowError(false)}>
           <div className="alert alert-error">
-            <span>Si è verificato un errore, riprova.</span>
+            <span>{t("body")}</span>
           </div>
         </div>
       )}

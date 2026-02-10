@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@plugin "daisyui";
+
+.markdown {
+  h3 {
+    @apply font-bold text-lg;
+  }
+
+  p {
+    @apply py-4;
+  }
+
+  ul {
+    @apply py-2 list-disc list-inside;
+  }
+}
+
+.badge {
+  @apply border-0;
+}
